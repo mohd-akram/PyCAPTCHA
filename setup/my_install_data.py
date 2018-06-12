@@ -75,7 +75,7 @@ class Data_Files:
         """
         from distutils.core import DEBUG
         if DEBUG:
-            print msg
+            print(msg)
 
 
     def finalize(self):
@@ -111,14 +111,12 @@ class my_install_data (install_data):
                         "-- please convert to Data_Files instance"))
             if type(d) is TupleType:
                 if len(d) != 2 or  not (type(d[1]) is ListType):
-                        raise DistutilsSetupError, \
-                          ("each element of 'data_files' option must be an "
+                        raise DistutilsSetupError("each element of 'data_files' option must be an "
                             "Data File instance, a string or 2-tuple (string,[strings])")
                 d = Data_Files(copy_to=d[0],files=d[1])
             else:
                 if not (type(d) is StringType):
-                        raise DistutilsSetupError, \
-                          ("each element of 'data_files' option must be an "
+                        raise DistutilsSetupError("each element of 'data_files' option must be an "
                            "Data File instance, a string or 2-tuple (string,[strings])")
                 d = Data_Files(files=[d])
         d.finalize()

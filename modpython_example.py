@@ -73,7 +73,7 @@ def image(req, id):
     """Generate an image for the CAPTCHA with the given ID string"""
     test = _getFactory(req).get(id)
     if not test:
-        raise apache.SERVER_RETURN, apache.HTTP_NOT_FOUND
+        raise apache.SERVER_RETURN(apache.HTTP_NOT_FOUND)
     req.content_type = "image/jpeg"
     test.render().save(req, "JPEG")
     return apache.OK
@@ -83,7 +83,7 @@ def solution(req, id, word):
     """Grade a CAPTCHA given a solution word"""
     test = _getFactory(req).get(id)
     if not test:
-        raise apache.SERVER_RETURN, apache.HTTP_NOT_FOUND
+        raise apache.SERVER_RETURN(apache.HTTP_NOT_FOUND)
 
     if not test.valid:
         # Invalid tests will always return False, to prevent

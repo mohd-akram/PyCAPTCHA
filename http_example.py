@@ -8,12 +8,12 @@
 
 from Captcha.Visual import Tests
 from Captcha import Factory
-import BaseHTTPServer, urlparse, sys
+import http.server, urllib.parse, sys
 
 
-class RequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
+class RequestHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
-        scheme, host, path, parameters, query, fragment = urlparse.urlparse(self.path)
+        scheme, host, path, parameters, query, fragment = urllib.parse.urlparse(self.path)
 
         # Split the path into segments
         pathSegments = path.split('/')[1:]
@@ -138,10 +138,10 @@ Or try...
 
 
 def main(port):
-    print "Starting server at http://localhost:%d/" % port
+    print("Starting server at http://localhost:%d/" % port)
     handler = RequestHandler
     handler.captchaFactory = Factory()
-    BaseHTTPServer.HTTPServer(('', port), RequestHandler).serve_forever()
+    http.server.HTTPServer(('', port), RequestHandler).serve_forever()
 
 if __name__ == "__main__":
     # The port number can be specified on the command line, default is 8080

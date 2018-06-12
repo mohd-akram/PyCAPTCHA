@@ -28,14 +28,14 @@ def checkVersion():
     if sys.version_info < requiredPythonVersion:
         raise Exception("%s requires at least Python %s, found %s instead." % (
             name,
-            string.join(map(str, requiredPythonVersion), "."),
-            string.join(map(str, sys.version_info), ".")))
+            string.join(list(map(str, requiredPythonVersion)), "."),
+            string.join(list(map(str, sys.version_info)), ".")))
 checkVersion()
 
 
 # Convenience imports
-from Base import *
-import File
-import Words
+from .Base import *
+from . import File
+from . import Words
 
 ### The End ###

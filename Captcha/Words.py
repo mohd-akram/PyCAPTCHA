@@ -8,7 +8,7 @@ Utilities for managing word lists and finding random words
 #
 
 import random, os
-import File
+from . import File
 
 
 class WordList(object):
@@ -28,7 +28,7 @@ class WordList(object):
         f = open(os.path.join(File.dataDir, "words", self.fileName))
 
         self.words = []
-        for line in f.xreadlines():
+        for line in f:
             line = line.strip()
             if not line:
                 continue

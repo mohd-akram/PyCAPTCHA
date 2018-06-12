@@ -67,7 +67,7 @@ captchaTimeout = 3600
 
 # ------------------------------------------------
 
-import sys, os, StringIO, sha, base64, traceback
+import sys, os, io, sha, base64, traceback
 import random, time, tempfile
 
 from Captcha.Visual.Tests import PseudoGimpy
@@ -224,7 +224,7 @@ def _demo():
     if not cmd:
         # first view
         key = getChallenge()
-        print """Content-Type: text/html
+        print("""Content-Type: text/html
 
 <html>
  <head>
@@ -243,15 +243,15 @@ def _demo():
   </form>
  </body>
 </html>
-""" % (key, key)
+""" % (key, key))
 
     elif cmd == 'showCaptchaImg':
         # answer browser request for the CAPTCHA challenge image
         key = fields.getvalue("captchaKey")
         bindata = getImageData(key)
-        print "Content-Type: image/jpeg"
-        print
-        print bindata
+        print("Content-Type: image/jpeg")
+        print()
+        print(bindata)
 
     elif cmd == 'answerCaptcha':
         # user has posted in an answer
@@ -261,7 +261,7 @@ def _demo():
         # test user's answer
         if testSolution(key, guess) == True:
             # successful
-            print """Content-Type: text/html
+            print("""Content-Type: text/html
 
 <html>
  <head>
@@ -274,11 +274,11 @@ def _demo():
   <a href="">Click here</a> for another demo
  </body>
 </html>
-"""
+""")
 
         else:
             # failed
-            print """Content-Type: text/html
+            print("""Content-Type: text/html
 
 <html>
  <head>
@@ -298,7 +298,7 @@ def _demo():
   </form>
  </body>
 </html>
-""" % (key, key)
+""" % (key, key))
 
 if __name__ == '__main__':
     _demo()
