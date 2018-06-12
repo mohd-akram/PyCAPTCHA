@@ -24,5 +24,6 @@ setup (name = "PyCAPTCHA",
                'graft Captcha/data',
            ],
        )],
+       install_requires = ['Pillow']
        )
 

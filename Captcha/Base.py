@@ -122,6 +122,6 @@ class PersistentFactory(Factory):
        """
     def __init__(self, filename, lifetime=60*15):
         Factory.__init__(self, lifetime)
-	self.storedInstances = shelve.open(filename)
+        self.storedInstances = shelve.open(filename)
 
 ### The End ###
